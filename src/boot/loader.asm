@@ -6,7 +6,6 @@ dw 0x55aa; 魔数，用于判断错误
 mov si, loading
 call print
 
-; xchg bx, bx; 断点
 
 detect_memory:
     ; 将 ebx 置为 0
@@ -42,12 +41,9 @@ detect_memory:
     mov si, detecting
     call print
 
-    xchg bx, bx
-
     jmp prepare_protected_mode
 
 prepare_protected_mode:
-    xchg bx, bx; 断点
 
     cli; 关闭中断
 
@@ -93,7 +89,7 @@ error:
 
 [bits 32]
 protect_mode:
-    xchg bx, bx; 断点
+    
     mov ax, data_selector
     mov ds, ax
     mov es, ax
@@ -103,11 +99,87 @@ protect_mode:
 
     mov esp, 0x10000; 修改栈顶
 
-    mov byte [0xb8000], 'P'
+    mov edi, 0x10000
+    mov ecx, 10  ;qi shi shanqu
+    mov bl, 200   ;shanqu shuliang
+    call read_disk
 
-    mov byte [0x200000], 'P'
+    jmp dword code_selector:0x10000
 
-jmp $; 阻塞
+    ud2
+    xchg bx, bx; 断点
+
+
+
+read_disk:
+    
+    mov dx, 0x1f2
+    mov al, bl
+    out dx, al
+
+    inc dx
+    mov al, cl 
+    out dx, al
+
+    inc dx
+    shr ecx, 8
+    mov al, cl 
+    out dx, al
+    
+    inc dx
+    shr ecx, 8
+    mov al, cl 
+    out dx, al
+
+    inc dx
+    shr ecx, 8
+    and cl, 0b1111
+    
+    mov al, 0b1110_0000
+    or al, cl
+    out dx, al
+
+    inc dx
+    mov al, 0x20
+    out dx, al
+
+    xor ecx, ecx
+    mov cl, bl
+
+    .read:
+        push cx
+        call .waits
+        call .reads
+        pop cx
+        loop .read
+    ret
+
+    .waits:
+        mov dx, 0x1f7
+        .check:
+            in al, dx
+            jmp $+2
+            jmp $+2
+            jmp $+2
+            and al, 0b1000_1000
+            cmp al, 0b0000_1000
+            jnz .check
+        ret 
+
+    .reads:
+        mov dx, 0x1f0
+        mov cx, 256
+        .readw:
+            in ax, dx
+            jmp $+2
+            jmp $+2
+            jmp $+2
+            mov [edi], ax
+            add edi, 2
+            loop .readw
+        ret
+
+
 
 
 code_selector equ (1 << 3)
