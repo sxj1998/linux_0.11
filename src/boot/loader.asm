@@ -107,7 +107,7 @@ protect_mode:
     jmp dword code_selector:0x10000
 
     ud2
-    xchg bx, bx; 断点
+
 
 
 

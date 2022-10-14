@@ -29,7 +29,7 @@ jnz error
 
 jmp 0:0x1002
 
-;xchg bx, bx ;breaking
+
 
 jmp $
 

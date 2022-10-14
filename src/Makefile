@@ -1,6 +1,19 @@
 BUILD:=../build
 SRC:=.
 
+CFLAGS:= -m32
+CFLAGS+= -fno-builtin
+CFLAGS+= -nostdinc
+CFLAGS+= -fno-pic
+CFLAGS+= -fno-pie
+CFLAGS+= -nostdlib
+CFLAGS+= -fno-stack-protector
+CFLAGS:=$(strip ${CFLAGS})
+
+DEBUG:= -g
+INCLUDE:= -I$(SRC)/include
+
+
 ENTERPOINT:=0x10000
 $(BUILD)/boot/%.bin: $(SRC)/boot/%.asm
 	$(shell mkdir -p $(dir $@))
@@ -10,7 +23,13 @@ $(BUILD)/kernel/%.o: $(SRC)/kernel/%.asm
 	$(shell mkdir -p $(dir $@))
 	nasm -f elf32 $< -o $@ 
 
-$(BUILD)/kernel.bin: $(BUILD)/kernel/start.o
+$(BUILD)/kernel/%.o: $(SRC)/kernel/%.c
+	$(shell mkdir -p $(dir $@))
+	gcc $(CFLAGS) $(DEBUG) $(INCLUDE) -c $< -o $@
+
+
+$(BUILD)/kernel.bin: $(BUILD)/kernel/start.o \
+					$(BUILD)/kernel/main.o
 	$(shell mkdir -p $(dir $@))
 	ld -m elf_i386 -static $^ -o $@ -Ttext $(ENTERPOINT)
 
