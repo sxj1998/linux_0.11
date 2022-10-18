@@ -33,6 +33,8 @@ $(BUILD)/kernel.bin: $(BUILD)/kernel/start.o \
 					$(BUILD)/kernel/io.o \
 					$(BUILD)/lib/string.o \
 					$(BUILD)/kernel/console.o \
+					$(BUILD)/kernel/printk.o \
+					$(BUILD)/lib/vsprintf.o \
 
 	$(shell mkdir -p $(dir $@))
 	ld -m elf_i386 -static $^ -o $@ -Ttext $(ENTERPOINT)
