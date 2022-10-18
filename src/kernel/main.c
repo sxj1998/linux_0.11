@@ -1,36 +1,18 @@
-#include <onix/onix.h>
-#include <onix/types.h>
-#include <onix/io.h>
-#include <onix/string.h>
 #include <onix/console.h>
-#include <onix/stdarg.h>
 #include <onix/printk.h>
-
-char message[] = "hello onix!!!\n";
-char buf[1024];
-
-// void test_args(int cnt, ...)
-// {
-//     int arg;
-//     va_list args;
-//     va_start(args, cnt);
-    
-//     while(cnt--)
-//     {
-//         arg = va_arg(args, int);
-//     }
-//     va_end(args);
-// }
+#include <onix/assert.h>
+#include <onix/debug.h>
 
 void kernel_init()
-{   
+{
     console_init();
-    int cnt = 30;
-   // test_args(5,1,0xaa,5,0x55,10);
-    while(cnt--)
-    {
-        printk("hello onix %#010x\r\n",cnt);
-    }
-    return;
+    //assert(3 < 5);
+    //assert(3 > 5);
+    //panic("Out of Memory");
 
+    BMB;
+
+    DEBUGK("debug onix!!!\n");
+
+    return;
 }
