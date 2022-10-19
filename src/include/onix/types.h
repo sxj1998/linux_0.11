@@ -8,7 +8,8 @@
 #define true 1
 #define false 0
 
-#define _packed __attributes__((packed))
+
+#define _packed __attribute__((packed)) // 用于定义特殊的结构体
 
 typedef unsigned int size_t;
 typedef char int8;
