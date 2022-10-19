@@ -34,7 +34,7 @@
 00000000000i[     ]   SB16 support: no
 00000000000i[     ]   USB support: yes
 00000000000i[     ]   VGA extension support: vbe 
-00000000000i[MEM0 ] allocated memory at 0x7fc039162010. after alignment, vector=0x7fc039163000
+00000000000i[MEM0 ] allocated memory at 0x7f59a2a76010. after alignment, vector=0x7f59a2a77000
 00000000000i[MEM0 ] 32.00MB
 00000000000i[MEM0 ] mem block size = 0x00100000, blocks=32
 00000000000i[MEM0 ] rom at 0xfffe0000/131072 ('/usr/share/bochs/BIOS-bochs-latest')
@@ -44,7 +44,7 @@
 00000000000i[PCI  ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
 00000000000i[     ] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS ] Using local time for initial clock
-00000000000i[CMOS ] Setting initial clock to: Wed Oct 19 20:23:14 2022 (time0=1666182194)
+00000000000i[CMOS ] Setting initial clock to: Thu Oct 20 00:15:55 2022 (time0=1666196155)
 00000000000i[     ] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA  ] channel 4 used by cascade
 00000000000i[     ] init_dev of 'pic' plugin device by virtual method
@@ -193,47 +193,12 @@
 00001878545i[BIOS ] ata0-0: PCHS=32/16/63 translation=none LCHS=32/16/63
 00005755751i[BIOS ] IDE time out
 00017824969i[BIOS ] Booting from 0000:7c00
-00018370889i[CPU0 ] [18370889] Stopped on MAGIC BREAKPOINT
-00018370889i[XGUI ] charmap update. Font Height is 16
-00018370889i[XGUI ] Mouse capture off
-00018371128i[CPU0 ] [18371128] Stopped on MAGIC BREAKPOINT
-00018371128i[XGUI ] Mouse capture off
-00018371366i[CPU0 ] [18371366] Stopped on MAGIC BREAKPOINT
-00018371366i[XGUI ] Mouse capture off
-00018371607i[CPU0 ] [18371607] Stopped on MAGIC BREAKPOINT
-00018371607i[XGUI ] Mouse capture off
-00018371847i[CPU0 ] [18371847] Stopped on MAGIC BREAKPOINT
-00018371847i[XGUI ] Mouse capture off
-00018372088i[CPU0 ] [18372088] Stopped on MAGIC BREAKPOINT
-00018372088i[XGUI ] Mouse capture off
-00018372328i[CPU0 ] [18372328] Stopped on MAGIC BREAKPOINT
-00018372328i[XGUI ] Mouse capture off
-00018372569i[CPU0 ] [18372569] Stopped on MAGIC BREAKPOINT
-00018372569i[XGUI ] Mouse capture off
-00018372809i[CPU0 ] [18372809] Stopped on MAGIC BREAKPOINT
-00018372809i[XGUI ] Mouse capture off
-00018373050i[CPU0 ] [18373050] Stopped on MAGIC BREAKPOINT
-00018373050i[XGUI ] Mouse capture off
-00018373290i[CPU0 ] [18373290] Stopped on MAGIC BREAKPOINT
-00018373290i[XGUI ] Mouse capture off
-00018373290i[     ] dbg: Quit
-00018373290i[CPU0 ] CPU is in protected mode (active)
-00018373290i[CPU0 ] CS.mode = 32 bit
-00018373290i[CPU0 ] SS.mode = 32 bit
-00018373290i[CPU0 ] EFER   = 0x00000000
-00018373290i[CPU0 ] | EAX=00001000  EBX=11111111  ECX=00013041  EDX=000003d5
-00018373290i[CPU0 ] | ESP=00002fc0  EBP=00002fec  ESI=22222222  EDI=33333333
-00018373290i[CPU0 ] | IOPL=0 id vip vif ac vm rf nt of df if tf sf zf AF pf cf
-00018373290i[CPU0 ] | SEG sltr(index|ti|rpl)     base    limit G D
-00018373290i[CPU0 ] |  CS:0008( 0001| 0|  0) 00000000 ffffffff 1 1
-00018373290i[CPU0 ] |  DS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-00018373290i[CPU0 ] |  SS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-00018373290i[CPU0 ] |  ES:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-00018373290i[CPU0 ] |  FS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-00018373290i[CPU0 ] |  GS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-00018373290i[CPU0 ] | EIP=00011153 (00011153)
-00018373290i[CPU0 ] | CR0=0x60000011 CR2=0x00000000
-00018373290i[CPU0 ] | CR3=0x00000000 CR4=0x00000000
-00018373290i[CMOS ] Last time is 1666182198 (Wed Oct 19 20:23:18 2022)
-00018373290i[XGUI ] Exit
-00018373290i[CTRL ] quit_sim called with exit code 0
+00018380285i[CPU0 ] [18380285] Stopped on MAGIC BREAKPOINT
+00018380285i[XGUI ] charmap update. Font Height is 16
+00018380285i[XGUI ] Mouse capture off
+00018380293i[CPU0 ] [18380293] Stopped on MAGIC BREAKPOINT
+00018380293i[XGUI ] Mouse capture off
+00018380295i[CPU0 ] [18380295] Stopped on MAGIC BREAKPOINT
+00018380295i[XGUI ] Mouse capture off
+00018381546i[CPU0 ] [18381546] Stopped on MAGIC BREAKPOINT
+00018381546i[XGUI ] Mouse capture off
