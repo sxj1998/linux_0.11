@@ -23,7 +23,7 @@ void clock_handler(int vector)
 
     jiffies++;
     DEBUGK("clock jiffies %d ...\n", jiffies);
-}
+}              
 
 void pit_init()
 {

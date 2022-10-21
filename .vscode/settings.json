@@ -4,6 +4,7 @@
         "global.h": "c",
         "string.h": "c",
         "printk.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "time.h": "c"
     }
 }
