@@ -1,4 +1,5 @@
 #include <onix/string.h>
+
 char *strcpy(char *dest, const char *src)
 {
     char *ptr = dest;

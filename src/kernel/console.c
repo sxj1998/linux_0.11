@@ -29,41 +29,49 @@
 #define ASCII_CR 0x0D  // \r
 #define ASCII_DEL 0x7F
 
-static u32 screen;
-static u32 pos;
-static u32 x, y;
-static u8 attr = 7;//字符样式
-static u16 erase = 0x0720;
+static u32 screen; // 当前显示器开始的内存位置
 
+static u32 pos; // 记录当前光标的内存位置
 
+static u32 x, y; // 当前光标的坐标
+
+static u8 attr = 7;        // 字符样式
+static u16 erase = 0x0720; // 空格
+
+// 获得当前显示器的开始位置
 static void get_screen()
 {
-    outb(CRT_ADDR_REG,CRT_START_ADDR_H);
-    screen = inb(CRT_DATA_REG)<<8;
-    outb(CRT_ADDR_REG,CRT_START_ADDR_L);
+    outb(CRT_ADDR_REG, CRT_START_ADDR_H); // 开始位置高地址
+    screen = inb(CRT_DATA_REG) << 8;      // 开始位置高八位
+    outb(CRT_ADDR_REG, CRT_START_ADDR_L);
     screen |= inb(CRT_DATA_REG);
-    screen <<= 1; //两个字节为一个字符
+
+    screen <<= 1; // screen *= 2
     screen += MEM_BASE;
 }
 
+// 设置当前显示器开始的位置
 static void set_screen()
 {
-    outb(CRT_ADDR_REG,CRT_START_ADDR_H);
-    outb(CRT_DATA_REG,((screen - MEM_BASE) >> 9)&0xff);
-    outb(CRT_ADDR_REG,CRT_START_ADDR_L);
-    outb(CRT_DATA_REG,((screen - MEM_BASE) >> 1)&0xff);
+    outb(CRT_ADDR_REG, CRT_START_ADDR_H); // 开始位置高地址
+    outb(CRT_DATA_REG, ((screen - MEM_BASE) >> 9) & 0xff);
+    outb(CRT_ADDR_REG, CRT_START_ADDR_L);
+    outb(CRT_DATA_REG, ((screen - MEM_BASE) >> 1) & 0xff);
 }
 
+// 获得当前光标位置
 static void get_cursor()
 {
-    outb(CRT_ADDR_REG,CRT_CURSOR_H);
-    pos = inb(CRT_DATA_REG) << 8;
-    outb(CRT_ADDR_REG,CRT_CURSOR_L);
+    outb(CRT_ADDR_REG, CRT_CURSOR_H); // 高地址
+    pos = inb(CRT_DATA_REG) << 8;     // 高八位
+    outb(CRT_ADDR_REG, CRT_CURSOR_L);
     pos |= inb(CRT_DATA_REG);
 
     get_screen();
-    pos << 1;
+
+    pos <<= 1; // pos *= 2
     pos += MEM_BASE;
+
     u32 delta = (pos - screen) >> 1;
     x = delta % WIDTH;
     y = delta / WIDTH;
@@ -71,27 +79,12 @@ static void get_cursor()
 
 static void set_cursor()
 {
-    outb(CRT_ADDR_REG,CRT_CURSOR_H);
-    outb(CRT_DATA_REG,((pos - MEM_BASE) >> 9)&0xff);
-    outb(CRT_ADDR_REG,CRT_CURSOR_L);
-    outb(CRT_DATA_REG,((pos - MEM_BASE) >> 1)&0xff);
+    outb(CRT_ADDR_REG, CRT_CURSOR_H); // 光标高地址
+    outb(CRT_DATA_REG, ((pos - MEM_BASE) >> 9) & 0xff);
+    outb(CRT_ADDR_REG, CRT_CURSOR_L);
+    outb(CRT_DATA_REG, ((pos - MEM_BASE) >> 1) & 0xff);
 }
 
-void console_init()
-{
-//    screen = 80*2 + MEM_BASE;
-//    set_screen();
-//    get_screen();
-
-      pos = 124 + MEM_BASE;
-      set_cursor();
-      get_cursor();
-
-
-
-      console_clear();
-    
-}
 void console_clear()
 {
     screen = MEM_BASE;
@@ -100,44 +93,38 @@ void console_clear()
     set_cursor();
     set_screen();
 
-    u16 *ptr = (u16 *) MEM_BASE;
-    u16 *end = (u16 *) MEM_END;
-
-    while (ptr < end)
+    u16 *ptr = (u16 *)MEM_BASE;
+    while (ptr < (u16 *)MEM_END)
     {
         *ptr++ = erase;
     }
 }
 
-
 // 向上滚屏
 static void scroll_up()
 {
-    if (screen + SCR_SIZE + ROW_SIZE < MEM_END)
-    {
-        u32 *ptr = (u32 *)(screen + SCR_SIZE);
-        for (size_t i = 0; i < WIDTH; i++)
-        {
-            *ptr++ = erase;
-        }
-        screen += ROW_SIZE;
-        pos += ROW_SIZE;
-    }
-    else
+    if (screen + SCR_SIZE + ROW_SIZE >= MEM_END)
     {
         memcpy((void *)MEM_BASE, (void *)screen, SCR_SIZE);
         pos -= (screen - MEM_BASE);
         screen = MEM_BASE;
     }
+    u32 *ptr = (u32 *)(screen + SCR_SIZE);
+    for (size_t i = 0; i < WIDTH; i++)
+    {
+        *ptr++ = erase;
+    }
+    screen += ROW_SIZE;
+    pos += ROW_SIZE;
+   
     set_screen();
 }
 
-
 static void command_lf()
 {
-    if(y + 1 < HEIGHT)
+    if (y + 1 < HEIGHT)
     {
-        y ++;
+        y++;
         pos += ROW_SIZE;
         return;
     }
@@ -152,7 +139,7 @@ static void command_cr()
 
 static void command_bs()
 {
-    if(x)
+    if (x)
     {
         x--;
         pos -= 2;
@@ -168,49 +155,57 @@ static void command_del()
 void console_write(char *buf, u32 count)
 {
     char ch;
- //   char *ptr = (char*)pos;
-    while (count --)
+    while (count--)
     {
         ch = *buf++;
-        switch(ch)
+        switch (ch)
         {
-            case ASCII_BEL:
-                break;
-            case ASCII_BS:
-                command_bs();
-                break;
-            case ASCII_HT:
-                break;
-            case ASCII_LF:
+        case ASCII_NUL:
+            break;
+        case ASCII_BEL:
+            // todo \a
+            break;
+        case ASCII_BS:
+            command_bs();
+            break;
+        case ASCII_HT:
+            break;
+        case ASCII_LF:
+            command_lf();
+            command_cr();
+            break;
+        case ASCII_VT:
+            break;
+        case ASCII_FF:
+            command_lf();
+            break;
+        case ASCII_CR:
+            command_cr();
+            break;
+        case ASCII_DEL:
+            command_del();
+            break;
+        default:
+            if (x >= WIDTH)
+            {
+                x -= WIDTH;
+                pos -= ROW_SIZE;
                 command_lf();
-                command_cr();
-                break;
-            case ASCII_VT:
-                break;
-            case ASCII_FF:
-                command_lf();
-                break;
-            case ASCII_CR:
-                command_cr();
-                break;
-            case ASCII_DEL:
-                command_del();
-                break;
-            default:
-                if(x >= WIDTH)
-                {
-                    x -= WIDTH;
-                    pos -= ROW_SIZE;
-                    command_lf();
-                }
-                *((char *)pos) = ch;
-                pos++;
-                *((char *)pos) = attr;
-                pos++;
-                x++;
-                break;
-            
+            }
+
+            *((char *)pos) = ch;
+            pos++;
+            *((char *)pos) = attr;
+            pos++;
+
+            x++;
+            break;
         }
     }
     set_cursor();
+}
+
+void console_init()
+{
+    console_clear();
 }

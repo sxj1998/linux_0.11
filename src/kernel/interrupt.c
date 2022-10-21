@@ -2,8 +2,8 @@
 #include <onix/global.h>
 #include <onix/debug.h>
 #include <onix/printk.h>
-#include <onix/io.h>
 #include <onix/stdlib.h>
+#include <onix/io.h>
 
 #define LOGK(fmt, args...) DEBUGK(fmt, ##args)
 // #define LOGK(fmt, args...)
@@ -61,15 +61,20 @@ void send_eoi(int vector)
     }
 }
 
-u32 counter = 0;
+extern void schedule();
 
 void default_handler(int vector)
 {
     send_eoi(vector);
-    LOGK("[%d] default interrupt called %d...\n", vector, counter++);
+    schedule();
 }
 
-void exception_handler(int vector)
+void exception_handler(
+    int vector,
+    u32 edi, u32 esi, u32 ebp, u32 esp,
+    u32 ebx, u32 edx, u32 ecx, u32 eax,
+    u32 gs, u32 fs, u32 es, u32 ds,
+    u32 vector0, u32 error, u32 eip, u32 cs, u32 eflags)
 {
     char *message = NULL;
     if (vector < 22)
@@ -81,7 +86,13 @@ void exception_handler(int vector)
         message = messages[15];
     }
 
-    printk("Exception : [0x%02X] %s \n", vector, messages[vector]);
+    printk("\nEXCEPTION : %s \n", messages[vector]);
+    printk("   VECTOR : 0x%02X\n", vector);
+    printk("    ERROR : 0x%08X\n", error);
+    printk("   EFLAGS : 0x%08X\n", eflags);
+    printk("       CS : 0x%02X\n", cs);
+    printk("      EIP : 0x%08X\n", eip);
+    printk("      ESP : 0x%08X\n", esp);
     // 阻塞
     hang();
 }
@@ -90,12 +101,12 @@ void exception_handler(int vector)
 void pic_init()
 {
     outb(PIC_M_CTRL, 0b00010001); // ICW1: 边沿触发, 级联 8259, 需要ICW4.
-    outb(PIC_M_DATA, 0x20);       // ICW2: 起始端口号 0x20
+    outb(PIC_M_DATA, 0x20);       // ICW2: 起始中断向量号 0x20
     outb(PIC_M_DATA, 0b00000100); // ICW3: IR2接从片.
     outb(PIC_M_DATA, 0b00000001); // ICW4: 8086模式, 正常EOI
 
     outb(PIC_S_CTRL, 0b00010001); // ICW1: 边沿触发, 级联 8259, 需要ICW4.
-    outb(PIC_S_DATA, 0x28);       // ICW2: 起始端口号 0x28
+    outb(PIC_S_DATA, 0x28);       // ICW2: 起始中断向量号 0x28
     outb(PIC_S_DATA, 2);          // ICW3: 设置从片连接到主片的 IR2 引脚
     outb(PIC_S_DATA, 0b00000001); // ICW4: 8086模式, 正常EOI
 
@@ -126,7 +137,7 @@ void idt_init()
         handler_table[i] = exception_handler;
     }
 
-    for (size_t i = 20; i < ENTRY_SIZE; i++)
+    for (size_t i = 0x20; i < ENTRY_SIZE; i++)
     {
         handler_table[i] = default_handler;
     }
