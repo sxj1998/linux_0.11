@@ -45,6 +45,8 @@ $(BUILD)/kernel.bin: $(BUILD)/kernel/start.o \
 					$(BUILD)/kernel/handler.o \
 					$(BUILD)/lib/stdlib.o \
 					$(BUILD)/kernel/clock.o \
+					$(BUILD)/kernel/rtc.o \
+					$(BUILD)/kernel/memory.o \
 					
 
 	$(shell mkdir -p $(dir $@))
@@ -64,6 +66,7 @@ $(BUILD)/master.img: $(BUILD)/boot/boot.bin \
 	yes | bximage -q -hd -size=16 -mode=flat $@
 	dd if=$(BUILD)/boot/boot.bin of=$@ bs=512 count=1 conv=notrunc
 	dd if=$(BUILD)/boot/loader.bin of=$@ bs=512 count=4 seek=2 conv=notrunc
+	test -n "$$(find $(BUILD)/system.bin -size -100k)"
 	dd if=$(BUILD)/system.bin of=$@ bs=512 count=200 seek=10 conv=notrunc
 
 test: $(BUILD)/master.img
