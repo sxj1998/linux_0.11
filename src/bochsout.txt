@@ -34,7 +34,7 @@
 00000000000i[     ]   SB16 support: no
 00000000000i[     ]   USB support: yes
 00000000000i[     ]   VGA extension support: vbe 
-00000000000i[MEM0 ] allocated memory at 0x7f5c25e18010. after alignment, vector=0x7f5c25e19000
+00000000000i[MEM0 ] allocated memory at 0x7f5916a1d010. after alignment, vector=0x7f5916a1e000
 00000000000i[MEM0 ] 32.00MB
 00000000000i[MEM0 ] mem block size = 0x00100000, blocks=32
 00000000000i[MEM0 ] rom at 0xfffe0000/131072 ('/usr/share/bochs/BIOS-bochs-latest')
@@ -44,7 +44,7 @@
 00000000000i[PCI  ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
 00000000000i[     ] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS ] Using local time for initial clock
-00000000000i[CMOS ] Setting initial clock to: Sun Oct 23 17:26:40 2022 (time0=1666517200)
+00000000000i[CMOS ] Setting initial clock to: Mon Oct 24 01:38:24 2022 (time0=1666546704)
 00000000000i[     ] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA  ] channel 4 used by cascade
 00000000000i[     ] init_dev of 'pic' plugin device by virtual method
@@ -194,34 +194,18 @@
 00005755751i[BIOS ] IDE time out
 00017824969i[BIOS ] Booting from 0000:7c00
 00018400001i[XGUI ] charmap update. Font Height is 16
-00018426247i[MEM0 ] allocate_block: block=0x1 used 0x3 of 0x20
-00018515377i[MEM0 ] allocate_block: block=0x2 used 0x4 of 0x20
-00018661886i[CPU0 ] [18661886] Stopped on MAGIC BREAKPOINT
-00018661886i[XGUI ] Mouse capture off
-00018661904i[CPU0 ] [18661904] Stopped on MAGIC BREAKPOINT
-00018661904i[XGUI ] Mouse capture off
-00018664264i[CPU0 ] [18664264] Stopped on MAGIC BREAKPOINT
-00018664264i[XGUI ] Mouse capture off
-00018664268i[CPU0 ] [18664268] Stopped on MAGIC BREAKPOINT
-00018664268i[XGUI ] Mouse capture off
-00018664268i[     ] dbg: Quit
-00018664268i[CPU0 ] CPU is in protected mode (active)
-00018664268i[CPU0 ] CS.mode = 32 bit
-00018664268i[CPU0 ] SS.mode = 32 bit
-00018664268i[CPU0 ] EFER   = 0x00000000
-00018664268i[CPU0 ] | EAX=01400000  EBX=0000117c  ECX=00000000  EDX=ffffff8e
-00018664268i[CPU0 ] | ESP=0000ffc8  EBP=0000fff0  ESI=000e109c  EDI=00029000
-00018664268i[CPU0 ] | IOPL=0 id vip vif ac vm rf nt of df if tf sf zf AF pf cf
-00018664268i[CPU0 ] | SEG sltr(index|ti|rpl)     base    limit G D
-00018664268i[CPU0 ] |  CS:0008( 0001| 0|  0) 00000000 ffffffff 1 1
-00018664268i[CPU0 ] |  DS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-00018664268i[CPU0 ] |  SS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-00018664268i[CPU0 ] |  ES:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-00018664268i[CPU0 ] |  FS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-00018664268i[CPU0 ] |  GS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-00018664268i[CPU0 ] | EIP=00011a48 (00011a48)
-00018664268i[CPU0 ] | CR0=0xe0000011 CR2=0x01400000
-00018664268i[CPU0 ] | CR3=0x00200000 CR4=0x00000000
-00018664268i[CMOS ] Last time is 1666517204 (Sun Oct 23 17:26:44 2022)
-00018664268i[XGUI ] Exit
-00018664268i[CTRL ] quit_sim called with exit code 0
+00018426328i[MEM0 ] allocate_block: block=0x1 used 0x3 of 0x20
+00018556498i[CPU0 ] [18556498] Stopped on MAGIC BREAKPOINT
+00018556498i[XGUI ] Mouse capture off
+00018775826i[CPU0 ] [18775826] Stopped on MAGIC BREAKPOINT
+00018775826i[XGUI ] Mouse capture off
+00018778180i[CPU0 ] [18778180] Stopped on MAGIC BREAKPOINT
+00018778180i[XGUI ] Mouse capture off
+00018778185i[CPU0 ] [18778185] Stopped on MAGIC BREAKPOINT
+00018778185i[XGUI ] Mouse capture off
+00018778281i[MEM0 ] allocate_block: block=0x9 used 0x4 of 0x20
+00018778325i[CPU0 ] [18778325] Stopped on MAGIC BREAKPOINT
+00018778325i[XGUI ] Mouse capture off
+00018778327i[MEM0 ] allocate_block: block=0x14 used 0x5 of 0x20
+00018778329i[CPU0 ] [18778329] Stopped on MAGIC BREAKPOINT
+00018778329i[XGUI ] Mouse capture off
