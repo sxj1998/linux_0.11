@@ -8,8 +8,8 @@ extern void interrupt_init();
 extern void clock_init();
 extern void time_init();
 extern void rtc_init();
+extern void memory_test();
 extern void hang();
-extern void  bitmap_tests();
 
 void kernel_init()
 {
@@ -20,7 +20,7 @@ void kernel_init()
     // time_init();
     // rtc_init();
 
-    bitmap_tests();
+    memory_test();
 
     // asm volatile("sti");
     hang();
