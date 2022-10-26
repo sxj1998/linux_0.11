@@ -47,6 +47,7 @@ $(BUILD)/kernel.bin: $(BUILD)/kernel/start.o \
 					$(BUILD)/kernel/clock.o \
 					$(BUILD)/kernel/rtc.o \
 					$(BUILD)/kernel/memory.o \
+					$(BUILD)/lib/bitmap.o \
 					
 
 	$(shell mkdir -p $(dir $@))

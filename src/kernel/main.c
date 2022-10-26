@@ -1,4 +1,3 @@
-
 #include <onix/debug.h>
 
 #define LOGK(fmt, args...) DEBUGK(fmt, ##args)
@@ -10,6 +9,7 @@ extern void clock_init();
 extern void time_init();
 extern void rtc_init();
 extern void hang();
+extern void  bitmap_tests();
 
 void kernel_init()
 {
@@ -20,9 +20,7 @@ void kernel_init()
     // time_init();
     // rtc_init();
 
-    BMB;
-
-    memory_test();
+    bitmap_tests();
 
     // asm volatile("sti");
     hang();
