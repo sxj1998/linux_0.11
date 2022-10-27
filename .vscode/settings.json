@@ -6,6 +6,7 @@
         "printk.h": "c",
         "stdlib.h": "c",
         "time.h": "c",
-        "interrupt.h": "c"
+        "interrupt.h": "c",
+        "syscall.h": "c"
     }
 }

@@ -48,6 +48,8 @@ $(BUILD)/kernel.bin: $(BUILD)/kernel/start.o \
 					$(BUILD)/kernel/rtc.o \
 					$(BUILD)/kernel/memory.o \
 					$(BUILD)/lib/bitmap.o \
+					$(BUILD)/kernel/gate.o \
+					$(BUILD)/lib/syscall.o \
 					
 
 	$(shell mkdir -p $(dir $@))
