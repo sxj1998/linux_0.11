@@ -1,4 +1,3 @@
-
 #include <onix/debug.h>
 #include <onix/interrupt.h>
 
@@ -36,5 +35,7 @@ void kernel_init()
     task_init();
     syscall_init();
 
-    set_interrupt_state(true);
+    list_test();
+
+    // set_interrupt_state(true);
 }
