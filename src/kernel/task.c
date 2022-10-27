@@ -125,7 +125,7 @@ u32 thread_a()
 
     while (true)
     {
-        delay(10000);
+        //delay(10000);
         printk("A");
     }
 }
@@ -136,7 +136,7 @@ u32 thread_b()
 
     while (true)
     {
-        delay(10000);
+
         printk("B");
     }
 }
@@ -147,7 +147,7 @@ u32 thread_c()
 
     while (true)
     {
-        delay(10000);
+
         printk("C");
     }
 }

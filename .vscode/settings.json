@@ -5,6 +5,7 @@
         "string.h": "c",
         "printk.h": "c",
         "stdlib.h": "c",
-        "time.h": "c"
+        "time.h": "c",
+        "interrupt.h": "c"
     }
 }

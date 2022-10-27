@@ -3,7 +3,7 @@
 section .text
 global task_switch
 task_switch:
-    xchg bx, bx
+ ;   xchg bx, bx
     push ebp
     mov ebp, esp
 
