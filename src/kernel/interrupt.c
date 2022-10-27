@@ -71,6 +71,40 @@ void set_interrupt_handler(u32 irq, handler_t handler)
     handler_table[IRQ_MASTER_NR + irq] = handler;
 }
 
+// 清除 IF 位，返回设置之前的值
+bool interrupt_disable()
+{
+    asm volatile(
+        "pushfl\n"        // 将当前 eflags 压入栈中
+        "cli\n"           // 清除 IF 位，此时外中断已被屏蔽
+        "popl %eax\n"     // 将刚才压入的 eflags 弹出到 eax
+        "shrl $9, %eax\n" // 将 eax 右移 9 位，得到 IF 位
+        "andl $1, %eax\n" // 只需要 IF 位
+    );
+}
+
+// 获得 IF 位
+bool get_interrupt_state()
+{
+    asm volatile(
+        "pushfl\n"        // 将当前 eflags 压入栈中
+        "popl %eax\n"     // 将压入的 eflags 弹出到 eax
+        "shrl $9, %eax\n" // 将 eax 右移 9 位，得到 IF 位
+        "andl $1, %eax\n" // 只需要 IF 位
+    );
+}
+
+// 设置 IF 位
+void set_interrupt_state(bool state)
+{
+    if (state)
+        asm volatile("sti\n");
+    else
+        asm volatile("cli\n");
+}
+
+
+
 void set_interrupt_mask(u32 irq, bool enable)
 {
     assert(irq >= 0 && irq < 16);
