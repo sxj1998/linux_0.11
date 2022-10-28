@@ -37,7 +37,7 @@
 00000000000i[USBCTL] Pluggable USB devices
 00000000000i[USBCTL]   floppy mouse tablet keypad keyboard hub disk cdrom
 00000000000i[USBCTL]   printer
-00000000000i[MEM0  ] allocated memory at 0x7fb4d447c010. after alignment, vector=0x7fb4d447d000
+00000000000i[MEM0  ] allocated memory at 0x7f7a56d47010. after alignment, vector=0x7f7a56d48000
 00000000000i[MEM0  ] 32.00MB
 00000000000i[MEM0  ] mem block size = 0x00020000, blocks=256
 00000000000i[MEM0  ] rom at 0xfffe0000/131072 ('/home/shexingju/installslab/bochs/share/bochs/BIOS-bochs-latest')
@@ -49,7 +49,7 @@
 00000000000i[DEV   ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
 00000000000i[PLUGIN] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS  ] Using local time for initial clock
-00000000000i[CMOS  ] Setting initial clock to: Thu Oct 27 23:37:27 2022 (time0=1666885047)
+00000000000i[CMOS  ] Setting initial clock to: Fri Oct 28 16:11:43 2022 (time0=1666944703)
 00000000000i[PLUGIN] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA   ] channel 4 used by cascade
 00000000000i[PLUGIN] init_dev of 'pic' plugin device by virtual method
@@ -188,16 +188,10 @@
 00000000000i[GDBST ] addr 000000000000fff0 len 1
 00000000000i[GDBST ] addr 000000000000fff0 len 8
 00000000000i[GDBST ] addr 000000000000fff0 len 7
-00000000000i[GDBST ] addr 0000000000012f80 len 40
-00000000000i[GDBST ] addr 0000000000012fb7 len 1
-00000000000i[GDBST ] addr 0000000000013380 len 40
-00000000000i[GDBST ] addr 00000000000133c5 len 1
 00000000000i[GDBST ] addr 000000000000fff0 len 1
 00000000000i[GDBST ] addr 000000000000fff0 len 1
 00000000000i[GDBST ] addr 000000000000fff0 len 8
 00000000000i[GDBST ] addr 000000000000fff0 len 7
-00000000000i[GDBST ] Setting breakpoint at 0000000000012fb7
-00000000000i[GDBST ] Setting breakpoint at 00000000000133c5
 00000004662i[BIOS  ] $Revision: 14314 $ $Date: 2021-07-14 18:10:19 +0200 (Wed, 14 Jul 2021) $
 00000318056i[KBD   ] reset-disable command received
 00000320838i[BIOS  ] Starting rombios32
@@ -206,7 +200,7 @@
 00000322306i[BIOS  ] ram_end=32MB
 00000363087i[BIOS  ] Found 1 cpu(s)
 00000376740i[BIOS  ] bios_table_addr: 0x000f9d98 end=0x000fcc00
-00000604756i[XGUI  ] charmap update. Font is 9 x 16
+00000604440i[XGUI  ] charmap update. Font is 9 x 16
 00000704556i[PCI   ] i440FX PMC write to PAM register 59 (TLB Flush)
 00001032491i[P2ISA ] PCI IRQ routing: PIRQA# set to 0x0b
 00001032515i[P2ISA ] PCI IRQ routing: PIRQB# set to 0x09
@@ -243,46 +237,30 @@
 00001540524i[BXVGA ] VBE known Display Interface b0c5
 00001543167i[VBIOS ] VBE Bios $Id: vbe.c 292 2021-06-03 12:24:22Z vruppert $
 00001771808i[BIOS  ] ata0-0: PCHS=32/16/63 translation=none LCHS=32/16/63
-00003071840i[XGUI  ] charmap update. Font is 9 x 16
+00002761524i[XGUI  ] charmap update. Font is 9 x 16
 00005205772i[BIOS  ] IDE time out
 00017178808i[BIOS  ] Booting from 0000:7c00
-00018261191i[GDBST ] found breakpoint at 133c5
-00018261191i[XGUI  ] charmap update. Font is 9 x 16
-00018261191i[GDBST ] stopped with ac1
-00018261191i[GDBST ] reg 8 set to 00000000000133c5
-00018261191i[GDBST ] reg 41 set to 00000000ffffffff
-00018261191i[GDBST ] Removing breakpoint at 0000000000012fb7
-00018261191i[GDBST ] Removing breakpoint at 00000000000133c5
-00018261191i[GDBST ] addr 000000000000ffc0 len 40
-00018261191i[GDBST ] Setting breakpoint at 0000000000012fb7
-00018261191i[GDBST ] stepping
-00018261192i[GDBST ] stopped with ac2
-00018261192i[GDBST ] Setting breakpoint at 00000000000133c5
-00245699513i[GDBST ] Got byte 3
-00245699513i[GDBST ] stopped with ac3
-00245699513i[GDBST ] Removing breakpoint at 0000000000012fb7
-00245699513i[GDBST ] Removing breakpoint at 00000000000133c5
-00245699513i[GDBST ] addr 0000000000010016 len 1
-00245699513p[GDBST ] >>PANIC<< Debugger asked us to quit
-00245699513i[CPU0  ] CPU is in protected mode (active)
-00245699513i[CPU0  ] CS.mode = 32 bit
-00245699513i[CPU0  ] SS.mode = 32 bit
-00245699513i[CPU0  ] EFER   = 0x00000000
-00245699513i[CPU0  ] | EAX=0000003e  EBX=0000117c  ECX=00000720  EDX=000003d5
-00245699513i[CPU0  ] | ESP=0000fff8  EBP=00000000  ESI=000e109c  EDI=00029000
-00245699513i[CPU0  ] | IOPL=0 id vip vif ac vm rf nt of df if tf sf zf af PF cf
-00245699513i[CPU0  ] | SEG sltr(index|ti|rpl)     base    limit G D
-00245699513i[CPU0  ] |  CS:0008( 0001| 0|  0) 00000000 ffffffff 1 1
-00245699513i[CPU0  ] |  DS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-00245699513i[CPU0  ] |  SS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-00245699513i[CPU0  ] |  ES:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-00245699513i[CPU0  ] |  FS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-00245699513i[CPU0  ] |  GS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-00245699513i[CPU0  ] | EIP=00010016 (00010016)
-00245699513i[CPU0  ] | CR0=0xe0000011 CR2=0x00000000
-00245699513i[CPU0  ] | CR3=0x00001000 CR4=0x00000000
-00245699513i[CPU0  ] 0x00010016>> jmp .-2 (0x00010016) : EBFE
-00245699513i[CMOS  ] Last time is 1666885108 (Thu Oct 27 23:38:28 2022)
-00245699513i[XGUI  ] Exit
-00245699513i[      ] restoring default signal behavior
-00245699513i[SIM   ] quit_sim called with exit code 1
+00057552524i[XGUI  ] charmap update. Font is 9 x 16
+00130800824p[      ] >>PANIC<< SIGNAL 2 caught
+00130800824i[CPU0  ] CPU is in protected mode (active)
+00130800824i[CPU0  ] CS.mode = 32 bit
+00130800824i[CPU0  ] SS.mode = 32 bit
+00130800824i[CPU0  ] EFER   = 0x00000000
+00130800824i[CPU0  ] | EAX=0000000e  EBX=11111111  ECX=000161c1  EDX=000003d4
+00130800824i[CPU0  ] | ESP=00104f6c  EBP=00104f6c  ESI=22222222  EDI=33333333
+00130800824i[CPU0  ] | IOPL=0 id vip vif ac vm rf nt of df if tf sf zf AF pf cf
+00130800824i[CPU0  ] | SEG sltr(index|ti|rpl)     base    limit G D
+00130800824i[CPU0  ] |  CS:0008( 0001| 0|  0) 00000000 ffffffff 1 1
+00130800824i[CPU0  ] |  DS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+00130800824i[CPU0  ] |  SS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+00130800824i[CPU0  ] |  ES:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+00130800824i[CPU0  ] |  FS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+00130800824i[CPU0  ] |  GS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+00130800824i[CPU0  ] | EIP=0001006b (0001006b)
+00130800824i[CPU0  ] | CR0=0xe0000011 CR2=0x00000000
+00130800824i[CPU0  ] | CR3=0x00001000 CR4=0x00000000
+00130800824i[CPU0  ] 0x0001006b>> jmp .+0 (0x0001006d) : EB00
+00130800824i[CMOS  ] Last time is 1666944735 (Fri Oct 28 16:12:15 2022)
+00130800824i[XGUI  ] Exit
+00130800824i[      ] restoring default signal behavior
+00130800824i[SIM   ] quit_sim called with exit code 1
