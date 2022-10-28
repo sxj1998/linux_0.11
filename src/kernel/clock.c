@@ -17,10 +17,14 @@
 u32 volatile jiffies = 0;
 u32 jiffy = JIFFY;
 
+extern void task_wakeup();
+
 void clock_handler(int vector)
 {
     assert(vector == 0x20);
     send_eoi(vector);
+
+    task_wakeup(); // 唤醒睡眠结束的任务
 
     jiffies++;
 //    DEBUGK("clock jiffies %d ...\n", jiffies);
