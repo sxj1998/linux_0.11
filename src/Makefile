@@ -39,6 +39,7 @@ $(BUILD)/kernel.bin: $(BUILD)/kernel/start.o \
 					$(BUILD)/kernel/debug.o \
 					$(BUILD)/kernel/global.o \
 					$(BUILD)/kernel/task.o \
+					$(BUILD)/kernel/thread.o \
 					$(BUILD)/kernel/timer.o \
 					$(BUILD)/kernel/schedule.o \
 					$(BUILD)/kernel/interrupt.o \
@@ -51,6 +52,7 @@ $(BUILD)/kernel.bin: $(BUILD)/kernel/start.o \
 					$(BUILD)/kernel/gate.o \
 					$(BUILD)/lib/syscall.o \
 					$(BUILD)/lib/list.o \
+					
 					
 
 	$(shell mkdir -p $(dir $@))
