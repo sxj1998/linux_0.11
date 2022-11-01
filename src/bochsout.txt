@@ -34,7 +34,7 @@
 00000000000i[     ]   SB16 support: no
 00000000000i[     ]   USB support: yes
 00000000000i[     ]   VGA extension support: vbe 
-00000000000i[MEM0 ] allocated memory at 0x7fd521834010. after alignment, vector=0x7fd521835000
+00000000000i[MEM0 ] allocated memory at 0x7feae4e08010. after alignment, vector=0x7feae4e09000
 00000000000i[MEM0 ] 32.00MB
 00000000000i[MEM0 ] mem block size = 0x00100000, blocks=32
 00000000000i[MEM0 ] rom at 0xfffe0000/131072 ('/usr/share/bochs/BIOS-bochs-latest')
@@ -44,7 +44,7 @@
 00000000000i[PCI  ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
 00000000000i[     ] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS ] Using local time for initial clock
-00000000000i[CMOS ] Setting initial clock to: Tue Nov  1 13:38:37 2022 (time0=1667281117)
+00000000000i[CMOS ] Setting initial clock to: Tue Nov  1 15:30:35 2022 (time0=1667287835)
 00000000000i[     ] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA  ] channel 4 used by cascade
 00000000000i[     ] init_dev of 'pic' plugin device by virtual method
@@ -71,7 +71,7 @@
 00000000000i[CD1  ] load cdrom with path=../build/kernel.iso
 00000000000i[CD1  ] Opening image file as a cd.
 00000000000i[HD   ] Media present in CD-ROM drive
-00000000000i[HD   ] Capacity is 5739 sectors (11.21 MB)
+00000000000i[HD   ] Capacity is 5740 sectors (11.21 MB)
 00000000000i[HD   ] Using boot sequence cdrom, none, none
 00000000000i[HD   ] Floppy boot signature check is enabled
 00000000000i[     ] init_dev of 'pci_ide' plugin device by virtual method
@@ -194,17 +194,26 @@
 00005746138i[BIOS ] IDE time out
 00017845307i[BIOS ] Booting from 07c0:0000
 00017854158i[MEM0 ] allocate_block: block=0x1 used 0x3 of 0x20
-00054492984i[MEM0 ] allocate_block: block=0x1e used 0x4 of 0x20
-00529024282i[     ] dbg: Quit
-00529024282i[CPU0 ] CPU is in protected mode (active)
-00529024282i[CPU0 ] CS.mode = 32 bit
-00529024282i[CPU0 ] SS.mode = 32 bit
-00529024282i[CPU0 ] EFER   = 0x00000000
-00529024282i[CPU0 ] | EAX=00000018  EBX=00108b28  ECX=000171d8  EDX=000003d5
-00529024282i[CPU0 ] | ESP=0007fe88  EBP=0007fe90  ESI=00000000  EDI=0000000000529024282i[XGUI ] Mouse capture off
-
-00529024282i[CTRL ] quit_sim called with exit code 000529024282i[CPU0 ] | IOPL=0 id vip vif ac vm rf nt of df if tf sf zf af PF cf
-00529024282i[CPU0 ] | SEG sltr(index|ti|rpl)     base    limit G D
-00529024282i[CPU0 ] |  CS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-00529024282i[CPU0 ] |  DS:0018( 0003| 0|  0) 00000000 ffffffff 1 1
-00529024282i[CPU0 ] |  SS:0018( 0003| 0|  0) 00000000 ffffffff 1 1
+00054498715i[MEM0 ] allocate_block: block=0x1e used 0x4 of 0x20
+00122804526i[CPU0 ] [122804526] Stopped on MAGIC BREAKPOINT
+00122804526i[XGUI ] Mouse capture off
+00123023854i[CPU0 ] [123023854] Stopped on MAGIC BREAKPOINT
+00123023854i[XGUI ] Mouse capture off
+00274964000i[     ] dbg: Quit
+00274964000i[CPU0 ] CPU is in protected mode (active)
+00274964000i[CPU0 ] CS.mode = 32 bit
+00274964000i[CPU0 ] SS.mode = 32 bit
+00274964000i[CPU0 ] EFER   = 0x00000000
+00274964000i[CPU0 ] | EAX=00000007  EBX=11111111  ECX=000171eb  EDX=000b969d
+00274964000i[CPU0 ] | ESP=00104f54  EBP=00104f6c  ESI=22222222  EDI=33333333
+00274964000i[CPU0 ] | IOPL=0 id vip vif ac vm rf nt of df IF tf sf zf af pf cf
+00274964000i[CPU0 ] | SEG sltr(index|ti|rpl)     base    limit G D
+00274964000i[CPU0 ] |  CS:0008( 0001| 0|  0) 00000000 ffffffff 1 1
+00274964000i[CPU0 ] |  DS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+00274964000i[CPU0 ] |  SS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+00274964000i[CPU0 ] |  ES:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+00274964000i[CPU0 ] |  FS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+00274964000i[CPU0 ] |  GS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+00274964000i[CPU0 ] | EIP=0001083a (0001083a)
+00274964000i[CPU0 ] | CR0=0xe0000011 CR2=0x00000000
+00274964000i[CPU0 ] | CR3=0x00001000 CR4=0x00000000
