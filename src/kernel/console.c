@@ -155,7 +155,7 @@ static void command_del()
 
 void console_write(char *buf, u32 count)
 {
-    bool intr = interrupt_disable();
+//    bool intr = interrupt_disable();
     char ch;
     while (count--)
     {
@@ -205,7 +205,7 @@ void console_write(char *buf, u32 count)
         }
     }
     set_cursor();
-    set_interrupt_state(intr);
+//    set_interrupt_state(intr);
 }
 
 void console_init()

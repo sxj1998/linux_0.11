@@ -37,7 +37,7 @@
 00000000000i[USBCTL] Pluggable USB devices
 00000000000i[USBCTL]   floppy mouse tablet keypad keyboard hub disk cdrom
 00000000000i[USBCTL]   printer
-00000000000i[MEM0  ] allocated memory at 0x7efd3ddd0010. after alignment, vector=0x7efd3ddd1000
+00000000000i[MEM0  ] allocated memory at 0x7f495002b010. after alignment, vector=0x7f495002c000
 00000000000i[MEM0  ] 32.00MB
 00000000000i[MEM0  ] mem block size = 0x00020000, blocks=256
 00000000000i[MEM0  ] rom at 0xfffe0000/131072 ('/home/shexingju/installslab/bochs/share/bochs/BIOS-bochs-latest')
@@ -49,7 +49,7 @@
 00000000000i[DEV   ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
 00000000000i[PLUGIN] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS  ] Using local time for initial clock
-00000000000i[CMOS  ] Setting initial clock to: Fri Oct 28 19:29:25 2022 (time0=1666956565)
+00000000000i[CMOS  ] Setting initial clock to: Tue Nov  1 12:03:42 2022 (time0=1667275422)
 00000000000i[PLUGIN] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA   ] channel 4 used by cascade
 00000000000i[PLUGIN] init_dev of 'pic' plugin device by virtual method
@@ -189,21 +189,21 @@
 00000000000i[GDBST ] addr 000000000000fff0 len 8
 00000000000i[GDBST ] addr 000000000000fff0 len 7
 00000000000i[GDBST ] addr 0000000000013300 len 40
-00000000000i[GDBST ] addr 000000000001332c len 1
+00000000000i[GDBST ] addr 000000000001334c len 1
 00000000000i[GDBST ] addr 00000000000133c0 len 40
-00000000000i[GDBST ] addr 00000000000133c8 len 1
+00000000000i[GDBST ] addr 00000000000133e8 len 1
 00000000000i[GDBST ] addr 0000000000013740 len 40
-00000000000i[GDBST ] addr 000000000001377a len 1
-00000000000i[GDBST ] addr 00000000000116c0 len 40
-00000000000i[GDBST ] addr 00000000000116de len 1
+00000000000i[GDBST ] addr 000000000001379a len 1
+00000000000i[GDBST ] addr 0000000000011300 len 40
+00000000000i[GDBST ] addr 0000000000011336 len 1
 00000000000i[GDBST ] addr 000000000000fff0 len 1
 00000000000i[GDBST ] addr 000000000000fff0 len 1
 00000000000i[GDBST ] addr 000000000000fff0 len 8
 00000000000i[GDBST ] addr 000000000000fff0 len 7
-00000000000i[GDBST ] Setting breakpoint at 00000000000116de
-00000000000i[GDBST ] Setting breakpoint at 000000000001332c
-00000000000i[GDBST ] Setting breakpoint at 00000000000133c8
-00000000000i[GDBST ] Setting breakpoint at 000000000001377a
+00000000000i[GDBST ] Setting breakpoint at 0000000000011336
+00000000000i[GDBST ] Setting breakpoint at 000000000001334c
+00000000000i[GDBST ] Setting breakpoint at 00000000000133e8
+00000000000i[GDBST ] Setting breakpoint at 000000000001379a
 00000004662i[BIOS  ] $Revision: 14314 $ $Date: 2021-07-14 18:10:19 +0200 (Wed, 14 Jul 2021) $
 00000318071i[KBD   ] reset-disable command received
 00000320815i[BIOS  ] Starting rombios32
@@ -212,7 +212,7 @@
 00000322283i[BIOS  ] ram_end=32MB
 00000363028i[BIOS  ] Found 1 cpu(s)
 00000376681i[BIOS  ] bios_table_addr: 0x000f9d98 end=0x000fcc00
-00000604952i[XGUI  ] charmap update. Font is 9 x 16
+00000602948i[XGUI  ] charmap update. Font is 9 x 16
 00000704497i[PCI   ] i440FX PMC write to PAM register 59 (TLB Flush)
 00001032432i[P2ISA ] PCI IRQ routing: PIRQA# set to 0x0b
 00001032456i[P2ISA ] PCI IRQ routing: PIRQB# set to 0x09
@@ -249,25 +249,8 @@
 00001540465i[BXVGA ] VBE known Display Interface b0c5
 00001543108i[VBIOS ] VBE Bios $Id: vbe.c 292 2021-06-03 12:24:22Z vruppert $
 00001771749i[BIOS  ] ata0-0: PCHS=32/16/63 translation=none LCHS=32/16/63
-00002539648i[XGUI  ] charmap update. Font is 9 x 16
+00002473696i[XGUI  ] charmap update. Font is 9 x 16
 00005205713i[BIOS  ] IDE time out
 00017178809i[BIOS  ] Booting from 0000:7c00
-00018102434i[GDBST ] found breakpoint at 116de
-00018102434i[XGUI  ] charmap update. Font is 9 x 16
-00018102434i[GDBST ] stopped with ac1
-00018102434i[GDBST ] reg 8 set to 00000000000116de
-00018102434i[GDBST ] reg 41 set to 00000000ffffffff
-00018102434i[GDBST ] Removing breakpoint at 00000000000116de
-00018102434i[GDBST ] Removing breakpoint at 000000000001332c
-00018102434i[GDBST ] Removing breakpoint at 00000000000133c8
-00018102434i[GDBST ] Removing breakpoint at 000000000001377a
-00018102434i[GDBST ] addr 000000000000ffc0 len 40
-00018102434i[GDBST ] addr 0000000000017f0c len 4
-00018102434i[GDBST ] addr 0000000000017ed0 len 4
-00018102434i[GDBST ] Setting breakpoint at 000000000001332c
-00018102434i[GDBST ] Setting breakpoint at 00000000000133c8
-00018102434i[GDBST ] Setting breakpoint at 000000000001377a
-00018102434i[GDBST ] stepping
-00018102435i[GDBST ] stopped with ac2
-00018102435i[GDBST ] Setting breakpoint at 00000000000116de
-05123840000p[      ] >>PANIC<< SIGNAL 2 caught
+00054926660i[XGUI  ] charmap update. Font is 9 x 16
+00208496000p[      ] >>PANIC<< SIGNAL 2 caught

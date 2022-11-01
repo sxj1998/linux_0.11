@@ -52,6 +52,7 @@ $(BUILD)/kernel.bin: $(BUILD)/kernel/start.o \
 					$(BUILD)/kernel/gate.o \
 					$(BUILD)/lib/syscall.o \
 					$(BUILD)/lib/list.o \
+					$(BUILD)/kernel/mutex.o \
 					
 					
 

@@ -7,6 +7,7 @@
         "stdlib.h": "c",
         "time.h": "c",
         "interrupt.h": "c",
-        "syscall.h": "c"
+        "syscall.h": "c",
+        "mutex.h": "c"
     }
 }
