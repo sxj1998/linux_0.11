@@ -32,9 +32,9 @@ void init_thread()
 
     while (true)
     {
-        lock_acquire(&lock);
-        LOGK("init task %d....\n", counter++);
-        lock_release(&lock);
+        // lock_acquire(&lock);
+        // LOGK("init task %d....\n", counter++);
+        // lock_release(&lock);
  //       sleep(500);
         
     }
@@ -47,9 +47,9 @@ void test_thread()
 
     while (true)
     {
-        lock_acquire(&lock);
-        LOGK("test task %d....\n", counter++);
-        lock_release(&lock);
+        // lock_acquire(&lock);
+        // LOGK("test task %d....\n", counter++);
+        // lock_release(&lock);
         //sleep(709);
     }
 }

@@ -13,6 +13,7 @@ extern void rtc_init();
 extern void task_init();
 extern void syscall_init();
 extern void hang();
+extern void keyboard_init();
 
 void kernel_init()
 {
@@ -20,6 +21,7 @@ void kernel_init()
     mapping_init();
     interrupt_init();
     clock_init();
+    keyboard_init();
 
     // time_init();
     // rtc_init();

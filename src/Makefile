@@ -62,6 +62,7 @@ $(BUILD)/kernel.bin: $(BUILD)/kernel/start.o \
 					$(BUILD)/lib/syscall.o \
 					$(BUILD)/lib/list.o \
 					$(BUILD)/kernel/mutex.o \
+					$(BUILD)/kernel/keyboard.o \
 			
 	$(shell mkdir -p $(dir $@))
 	ld ${LDFLAGS} $^ -o $@
