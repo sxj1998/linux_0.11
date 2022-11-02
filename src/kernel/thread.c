@@ -19,23 +19,23 @@ void idle_thread()
     }
 }
 
-#include <onix/mutex.h>
-
-lock_t lock;
+extern u32 keyboard_read(char *buf, u32 count);
 
 
 void init_thread()
 {
-    lock_init(&lock);
     set_interrupt_state(true);
     u32 counter = 0;
+    char ch;
 
     while (true)
     {
-        // lock_acquire(&lock);
-        // LOGK("init task %d....\n", counter++);
-        // lock_release(&lock);
- //       sleep(500);
+        bool intr = interrupt_disable();
+        keyboard_read(&ch, 1);
+        //LOGK("%c", ch);
+        printk("%c", ch);
+
+        set_interrupt_state(intr);
         
     }
 }
