@@ -34,7 +34,9 @@ _start:
     push eax; magic
 
     call console_init   ; 控制台初始化
+    xchg bx,bx
     call gdt_init       ; 全局描述符初始化
+    xchg bx,bx
     lgdt [gdt_ptr]
     jmp dword code_selector:_next
 _next:
