@@ -8,6 +8,8 @@
         "time.h": "c",
         "interrupt.h": "c",
         "syscall.h": "c",
-        "mutex.h": "c"
+        "mutex.h": "c",
+        "stdio.h": "c",
+        "task.h": "c"
     }
 }

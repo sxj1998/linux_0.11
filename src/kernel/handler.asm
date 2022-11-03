@@ -35,7 +35,7 @@ interrupt_entry:
 
 global interrupt_exit
 interrupt_exit:
-
+    xchg bx, bx
     ; 对应 push eax，调用结束恢复栈
     add esp, 4
 
