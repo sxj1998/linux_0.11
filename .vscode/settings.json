@@ -10,6 +10,7 @@
         "syscall.h": "c",
         "mutex.h": "c",
         "stdio.h": "c",
-        "task.h": "c"
+        "task.h": "c",
+        "list.h": "c"
     }
 }

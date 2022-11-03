@@ -3,6 +3,7 @@
 #include <onix/debug.h>
 #include <onix/task.h>
 #include <onix/stdio.h>
+#include <onix/arena.h>
 
 #define LOGK(fmt, args...) DEBUGK(fmt, ##args)
 
@@ -24,7 +25,7 @@ void idle_thread()
 extern u32 keyboard_read(char *buf, u32 count);
 
 
-static void real_init_thread()
+static void user_init_thread()
 {
     u32 counter = 0;
     char ch;
@@ -35,8 +36,8 @@ static void real_init_thread()
         //asm volatile("in $0x92, %ax\n");
         sleep(100);
         // LOGK("%c\n", ch);
-        // printk("%c", ch);
-        printf("task is in user mode %d\n", counter++);
+//        printk("%c", ch);
+        //printf("task is in user mode %d\n", counter++);
         
     }
 }
@@ -45,7 +46,7 @@ void init_thread()
 {
     // set_interrupt_state(true);
     char temp[100]; // 为栈顶有足够的空间
-    task_to_user_mode(real_init_thread);
+    task_to_user_mode(user_init_thread);
 }
 
 void test_thread()
@@ -55,9 +56,19 @@ void test_thread()
 
     while (true)
     {
-        // lock_acquire(&lock);
         // LOGK("test task %d....\n", counter++);
-        // lock_release(&lock);
-        //sleep(709);
+        void *ptr = kmalloc(1200);
+        LOGK("kmalloc 0x%p....\n", ptr);
+        kfree(ptr);
+
+        ptr = kmalloc(1024);
+        LOGK("kmalloc 0x%p....\n", ptr);
+        kfree(ptr);
+
+        ptr = kmalloc(54);
+        LOGK("kmalloc 0x%p....\n", ptr);
+        kfree(ptr);
+
+        sleep(5000);
     }
 }
