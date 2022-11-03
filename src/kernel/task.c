@@ -8,6 +8,7 @@
 #include <onix/bitmap.h>
 #include <onix/syscall.h>
 #include <onix/list.h>
+#include <onix/global.h>
 
 extern bitmap_t kernel_map;
 extern void task_switch(task_t *next);
@@ -16,6 +17,7 @@ extern void task_switch(task_t *next);
 
 extern u32 volatile jiffies;
 extern u32 jiffy;
+extern tss_t tss;
 
 static task_t *task_table[NR_TASKS]; // 任务表
 static list_t block_list;            // 任务默认阻塞链表
@@ -170,6 +172,16 @@ void task_wakeup()
     }
 }
 
+// 激活任务
+void task_activate(task_t *task)
+{
+    assert(task->magic == ONIX_MAGIC);
+
+    if (task->uid != KERNEL_USER)
+    {
+        tss.esp0 = (u32)task + PAGE_SIZE;
+    }
+}
 
 task_t *running_task()
 {
@@ -202,6 +214,7 @@ void schedule()
     if (next == current)
         return;
 
+    task_activate(next);
     task_switch(next);
 }
 
@@ -233,6 +246,47 @@ static task_t *task_create(target_t target, const char *name, u32 priority, u32 
     task->magic = ONIX_MAGIC;
 
     return task;
+}
+
+// 调用该函数的地方不能有任何局部变量
+// 调用前栈顶需要准备足够的空间
+void task_to_user_mode(target_t target)
+{
+    task_t *task = running_task();
+
+    u32 addr = (u32)task + PAGE_SIZE;
+
+    addr -= sizeof(intr_frame_t);
+    intr_frame_t *iframe = (intr_frame_t *)(addr);
+
+    iframe->vector = 0x20;
+    iframe->edi = 1;
+    iframe->esi = 2;
+    iframe->ebp = 3;
+    iframe->esp_dummy = 4;
+    iframe->ebx = 5;
+    iframe->edx = 6;
+    iframe->ecx = 7;
+    iframe->eax = 8;
+
+    iframe->gs = 0;
+    iframe->ds = USER_DATA_SELECTOR;
+    iframe->es = USER_DATA_SELECTOR;
+    iframe->fs = USER_DATA_SELECTOR;
+    iframe->ss = USER_DATA_SELECTOR;
+    iframe->cs = USER_CODE_SELECTOR;
+
+    iframe->error = ONIX_MAGIC;
+
+    u32 stack3 = alloc_kpage(1); // todo replace to user stack
+
+    iframe->eip = (u32)target;
+    iframe->eflags = (0 << 12 | 0b10 | 1 << 9);
+    iframe->esp = stack3 + PAGE_SIZE;
+
+    asm volatile(
+        "movl %0, %%esp\n"
+        "jmp interrupt_exit\n" ::"m"(iframe));
 }
 
 static void task_setup()
