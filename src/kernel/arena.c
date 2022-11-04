@@ -36,7 +36,7 @@ static arena_t *get_block_arena(block_t *block)
     return (arena_t *)((u32)block & 0xfffff000);
 }
 
-void *kmalloc(size_t size)
+void *kmalloc(size_t size)//size = 1200
 {
     arena_descriptor_t *desc = NULL;
     arena_t *arena;
@@ -45,17 +45,17 @@ void *kmalloc(size_t size)
 
     if (size > 1024)
     {
-        u32 asize = size + sizeof(arena_t);          // asize 是 需要malloc的内存 + arena_t结构体大小
-        u32 count = div_round_up(asize, PAGE_SIZE);  //所有的asize 需要多少页
+        u32 asize = size + sizeof(arena_t);          // asize 是 需要malloc的内存 + arena_t结构体大小  asize = 1216
+        u32 count = div_round_up(asize, PAGE_SIZE);  //所有的asize 需要多少页   count = 1
 
-        arena = (arena_t *)alloc_kpage(count);
+        arena = (arena_t *)alloc_kpage(count);       //申请相应页 并且初始化为arena_t  arena = 106000
         memset(arena, 0, count * PAGE_SIZE);
         arena->large = true;
         arena->count = count;
         arena->desc = NULL;
         arena->magic = ONIX_MAGIC;
 
-        addr = (char *)((u32)arena + sizeof(arena_t));
+        addr = (char *)((u32)arena + sizeof(arena_t));  //实际上addr地址为 alloc 分配的地址 + 去处arena_t 的大小，往后才是 alloc后真正可以使用的大小
         return addr;
     }
 
@@ -70,7 +70,7 @@ void *kmalloc(size_t size)
 
     if (list_empty(&desc->free_list))
     {
-        arena = (arena_t *)alloc_kpage(1);
+        arena = (arena_t *)alloc_kpage(1);    //直接alloc一页   
         memset(arena, 0, PAGE_SIZE);
 
         arena->desc = desc;
@@ -103,15 +103,15 @@ void kfree(void *ptr)
 {
     assert(ptr);
 
-    block_t *block = (block_t *)ptr;
-    arena_t *arena = get_block_arena(block);
+    block_t *block = (block_t *)ptr;    //block = 106010
+    arena_t *arena = get_block_arena(block); //获取 arena 地址 106000
 
     assert(arena->large == 1 || arena->large == 0);
     assert(arena->magic == ONIX_MAGIC);
 
     if (arena->large)
     {
-        free_kpage((u32)arena, arena->count);
+        free_kpage((u32)arena, arena->count); //直接free掉所在页
         return;
     }
 

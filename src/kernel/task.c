@@ -9,6 +9,7 @@
 #include <onix/syscall.h>
 #include <onix/list.h>
 #include <onix/global.h>
+#include <onix/arena.h>
 
 extern bitmap_t kernel_map;
 extern void task_switch(task_t *next);
@@ -254,6 +255,10 @@ void task_to_user_mode(target_t target)
 {
     task_t *task = running_task();
 
+    task->vmap = kmalloc(sizeof(bitmap_t)); // todo kfree
+    void *buf = (void *)alloc_kpage(1);     // todo free_kpage
+    bitmap_init(task->vmap, buf, PAGE_SIZE, KERNEL_MEMORY_SIZE / PAGE_SIZE);
+    
     u32 addr = (u32)task + PAGE_SIZE;
 
     addr -= sizeof(intr_frame_t);

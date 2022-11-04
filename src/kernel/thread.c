@@ -35,6 +35,7 @@ static void user_init_thread()
         BMB;
         //asm volatile("in $0x92, %ax\n");
         sleep(100);
+            test();
         // LOGK("%c\n", ch);
 //        printk("%c", ch);
         //printf("task is in user mode %d\n", counter++);
@@ -57,17 +58,6 @@ void test_thread()
     while (true)
     {
         // LOGK("test task %d....\n", counter++);
-        void *ptr = kmalloc(1200);
-        LOGK("kmalloc 0x%p....\n", ptr);
-        kfree(ptr);
-
-        ptr = kmalloc(1024);
-        LOGK("kmalloc 0x%p....\n", ptr);
-        kfree(ptr);
-
-        ptr = kmalloc(54);
-        LOGK("kmalloc 0x%p....\n", ptr);
-        kfree(ptr);
 
         sleep(5000);
     }
