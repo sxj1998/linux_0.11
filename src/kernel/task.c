@@ -178,6 +178,12 @@ void task_activate(task_t *task)
 {
     assert(task->magic == ONIX_MAGIC);
 
+    if (task->pde != get_cr3())
+    {
+        set_cr3(task->pde);
+        // BMB;
+    }
+
     if (task->uid != KERNEL_USER)
     {
         tss.esp0 = (u32)task + PAGE_SIZE;
@@ -255,10 +261,16 @@ void task_to_user_mode(target_t target)
 {
     task_t *task = running_task();
 
+    // 创建用户进程虚拟内存位图
     task->vmap = kmalloc(sizeof(bitmap_t)); // todo kfree
     void *buf = (void *)alloc_kpage(1);     // todo free_kpage
     bitmap_init(task->vmap, buf, PAGE_SIZE, KERNEL_MEMORY_SIZE / PAGE_SIZE);
-    
+
+    // 创建用户进程页表
+    task->pde = (u32)copy_pde();
+    set_cr3(task->pde);
+
+
     u32 addr = (u32)task + PAGE_SIZE;
 
     addr -= sizeof(intr_frame_t);
@@ -287,7 +299,7 @@ void task_to_user_mode(target_t target)
 
     iframe->eip = (u32)target;
     iframe->eflags = (0 << 12 | 0b10 | 1 << 9);
-    iframe->esp = stack3 + PAGE_SIZE;
+    iframe->esp = USER_STACK_TOP;
 
     asm volatile(
         "movl %0, %%esp\n"

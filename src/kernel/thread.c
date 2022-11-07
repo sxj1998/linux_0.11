@@ -22,6 +22,12 @@ void idle_thread()
     }
 }
 
+void test_recursion()
+{
+    char tmp[0x400];
+    test_recursion();
+}
+
 extern u32 keyboard_read(char *buf, u32 count);
 
 
@@ -32,13 +38,10 @@ static void user_init_thread()
 
     while (true)
     {
+        // test();
+        printf("task is in user mode %d\n", counter++);
         BMB;
-        //asm volatile("in $0x92, %ax\n");
-        sleep(100);
-            test();
-        // LOGK("%c\n", ch);
-//        printk("%c", ch);
-        //printf("task is in user mode %d\n", counter++);
+        test_recursion();
         
     }
 }

@@ -13,6 +13,12 @@
 // 用户栈顶地址 128M
 #define USER_STACK_TOP 0x8000000
 
+// 用户栈最大 2M
+#define USER_STACK_SIZE 0x200000
+
+// 用户栈底地址 128M - 2M
+#define USER_STACK_BOTTOM (USER_STACK_TOP - USER_STACK_SIZE)
+
 // 内核页目录索引
 #define KERNEL_PAGE_DIR 0x1000
 
@@ -31,6 +37,9 @@ typedef struct page_entry_t
     u32 index : 20;  // 页索引
 } _packed page_entry_t;
 
+// 得到 cr2 寄存器
+u32 get_cr2();
+
 // 得到 cr3 寄存器
 u32 get_cr3();
 
@@ -48,5 +57,7 @@ void link_page(u32 vaddr);
 
 // 去掉 vaddr 对应的物理内存映射
 void unlink_page(u32 vaddr);
+
+page_entry_t *copy_pde();
 
 #endif
