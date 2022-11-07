@@ -11,6 +11,8 @@
 #include <onix/global.h>
 #include <onix/arena.h>
 
+#define LOGK(fmt, args...) DEBUGK(fmt, ##args)
+
 extern bitmap_t kernel_map;
 extern void task_switch(task_t *next);
 
@@ -250,6 +252,7 @@ static task_t *task_create(target_t target, const char *name, u32 priority, u32 
     task->uid = uid;
     task->vmap = &kernel_map;
     task->pde = KERNEL_PAGE_DIR; // page directory entry
+    task->brk = KERNEL_MEMORY_SIZE;
     task->magic = ONIX_MAGIC;
 
     return task;
